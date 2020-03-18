@@ -41,7 +41,7 @@ $statement->closeCursor();
                                 <td><?php echo $item['Title']; ?></td>
                                 <td><?php echo $item['Description']; ?></td>
                                 <td><form action="delete_item.php" method="post">
-                                    <input type="hidden" name="item_num"
+                                    <input type="hidden" name="ItemNum"
                                         value="<?php echo $item['ItemNum']; ?>">
                                     <input type="submit" value="Remove" class="button red">
                                 </form></td>
