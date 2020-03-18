@@ -14,10 +14,10 @@ if($title == null || $description == null) {
     $query = 'INSERT INTO todoitems
                  (Title, Description)
               VALUES
-                 (:Title, :Description)';
+                 (:title, :description)';
     $statement = $db->prepare($query);
-    $statement->bindValue(':Title', $title);
-    $statement->bindValue(':Description', $description);
+    $statement->bindValue(':title', $title);
+    $statement->bindValue(':description', $description);
     $statement->execute();
     $statement->closeCursor();
 
