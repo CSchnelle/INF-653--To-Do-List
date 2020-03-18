@@ -4,7 +4,7 @@ require_once('database.php');
 $ItemNum = filter_input(INPUT_POST, 'ItemNum', FILTER_VALIDATE_INT);
 
 // Delete
-if ($item_num != false) {
+if ($ItemNum != false) {
     $query = 'DELETE FROM todoitems
               WHERE ItemNum = :ItemNum';
     $statement = $db->prepare($query);
