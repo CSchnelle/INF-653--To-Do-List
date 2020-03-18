@@ -20,11 +20,11 @@ $statement->closeCursor();
 <!--body section-->
     <body>
         <header>
-            <h1>My To Do List</h1>
-        </header>
-<main>
-    <section>
-    <?php if( sizeof($todoitems) != 0 ) { ?>
+             <h1>My To Do List</h1>
+    </header>
+    <main>
+        <section>
+            <?php if( sizeof($todoitems) != 0 ) { ?>
                 <div id="table-overflow">
                     <table>
                         <thead>
@@ -41,7 +41,7 @@ $statement->closeCursor();
                                 <td><?php echo $item['Title']; ?></td>
                                 <td><?php echo $item['Description']; ?></td>
                                 <td><form action="delete_item.php" method="post">
-                                    <input type="hidden" name="ItemNum"
+                                    <input type="hidden" name="item_num"
                                         value="<?php echo $item['ItemNum']; ?>">
                                     <input type="submit" value="Remove" class="button red">
                                 </form></td>
