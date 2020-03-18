@@ -3,24 +3,25 @@
 $title = filter_input(INPUT_POST, 'title');
 $description = filter_input(INPUT_POST, 'description');
 
-//validate
-if($title == null || $description == null) {
-    $error = "Invalid todo item data. Try again.";
+//check input
+if ($title == null || $description == null) {
+    $error = "Invalid to do item data. Check all fields and try again.";
     include('error.php');
-}else{
+} else {
     require_once('database.php');
-    //add items
-    
-    $query = 'INSERT INTO todoitems
+
+//add items  
+    $query = 'INSERT INTO todoitems 
                  (Title, Description)
               VALUES
-                 (:title, :description)';
+                 (:title, :descr)';
     $statement = $db->prepare($query);
     $statement->bindValue(':title', $title);
-    $statement->bindValue(':description', $description);
+    $statement->bindValue(':descr', $description);
     $statement->execute();
     $statement->closeCursor();
-
-    // display items
+    
+//display items
     include('index.php');
+}
 ?>
