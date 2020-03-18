@@ -1,7 +1,7 @@
 <?php
-$dsn = 'mysql:host=localhost;dbname=todolist';
-    $username = 'mgs_user';
-    $password = 'pa55word';
+$dsn = 'mysql:host=qbhol6k6vexd5qjs.cbetxkdyhwsb.us-east-1.rds.amazonaws.com;dbname=w037hv168sn3tjez';
+    $username = 'u8lequiy705eacm8';
+    $password = 'cu1c97oi6oa2bf0v';
 //$username = 'root';
 
 try {
