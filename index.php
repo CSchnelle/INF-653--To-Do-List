@@ -1,54 +1,63 @@
 <?php
-include_once('database.php');
+require_once('database.php');
 
 
-//  
-$query = 'SELECT * FROM todoitems';
+//get items  
+$query = 'SELECT * FROM todoitems ORDER BY ItemNum';
 $statement = $db->prepare($query);
 $statement->execute();
-$fetch = $statement->fetchAll();
+$todoitems = $statement->fetchAll();
 $statement->closeCursor();
 
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html>
+    <!--head section-->
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>To Do List</title>
+    <title>My To Do List</title>
+</head>
+    
+<!--body section-->
+    <body>
+        <header>
+            <h1>My To Do List</h1>
+        </header>
 <main>
     <section>
-    <?php
-    $sql = "SELECT * FROM todoitems;";
-    $result = mysqli_query($db, $sql);
-    $resultCheck = mysqli_num_rows($result);
-
-    if($resultCheck > 0){
-        while($row = mysqli_fetch_assoc($result)){
-            echo $row['ItemNum'] . "<br>" . ['Title'] . "<br>" . ['Description'];
-        }
-    }
-    else{
-        echo 'This table is empty';
-    }
-?>
-
-<?php foreach ($todoitems as $todoitem) : ?>
-            <tr>
-                <td><?php echo $todoitem['ItemNum']; ?></td>
-                <td><?php echo $todoitem['Title']; ?></td>
-                <td><?php echo $todoitem['Description']; ?></td>
-                <td><form action="delete_item.php" method="post">
-                    <input type="hidden" name="ItemNum"
-                           value="<?php echo $todoitem['ItemNum']; ?>">
-                    <input type="submit" value="Delete">
-                </form></td>
-            </tr>
-            <?php endforeach; ?>
-        </table>
-        <p><a href="add_item_form.php">Click here to add an item</a></p>       
-    </section>
-</main>
+    <?php if( sizeof($todoitems) != 0 ) { ?>
+                <div id="table-overflow">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ItemNum</th>
+                                <th>Title</th>
+                                <th colspan="2">Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($todoitems as $item) : ?>
+                            <tr>
+                                <td><?php echo $item['ItemNum']; ?></td>
+                                <td><?php echo $item['Title']; ?></td>
+                                <td><?php echo $item['Description']; ?></td>
+                                <td><form action="delete_item.php" method="post">
+                                    <input type="hidden" name="item_num"
+                                        value="<?php echo $item['ItemNum']; ?>">
+                                    <input type="submit" value="Remove" class="button red">
+                                </form></td>
+                            </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
+                <p><a href="add_item_form.php">Click here</a> to add a new item to the list.</p>     
+            <?php } else { ?>
+                <p>No to do list items exist yet. <a href="add_item_form.php">Click here</a> to add an item.</p>     
+            <?php } ?>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; <?php echo date("Y"); ?> My To Do List</p>
+    </footer>
 </body>
 </html>
